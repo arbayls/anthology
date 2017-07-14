@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Diffbot from 'diffbot-node-client'
+import Diffbot from 'diffbot-node-client';
+import {DataRetriever} from './dataretriever.js';
+import axios from 'axios';
 
 
 class App extends Component {
@@ -23,7 +25,7 @@ class App extends Component {
 function getData (url, callback, author, sources) {
   var client = new Diffbot("29e49e8b36b2d63c2cf3ed4cf26e584b")
   client.article.get({
-    url: url
+    url: "https://<b>www.inc.com</b>/author/<b>larry-kim</b>"
     }, function onSuccess(response) {
         callback(response, author, sources)
     }, function onError(response) {
@@ -33,7 +35,6 @@ function getData (url, callback, author, sources) {
 
 //formats input from form into searchable http addresses, and fires getData functions for individual api calls.
 function dataGetter () {
-
   var author = document.querySelector('#author').value;
   var firstName = author.split(' ')[0];
   var lastName = author.split(' ')[1];
@@ -61,9 +62,9 @@ function dataGetter () {
   }
 
   var retriever = new DataRetriever();
-  retriever.load(incMag, incParser, incObj);
+  // retriever.load(incMag, incParser, incObj);
   retriever.load(businessInsider, businessInsiderParser, businessInsiderObj);
-  retriever.load(clearvoice, clearvoiceParser, clearvoiceObj);
+  // retriever.load(clearvoice, clearvoiceParser, clearvoiceObj);
   retriever.getLoaded();
 }
 
@@ -107,61 +108,5 @@ function twitterParser(response, twitterHandle) {
 //add twitter stuff here...
 }
 
-function DataRetriever() {
-  this.data = [];
-  this.loaded = [];
-  this.numReceived = 0;
-}
-
-DataRetriever.prototype.load = function(url, callback, data) {
-  this.loaded.push({url: url, callback: callback, data: data});
-}
-
-DataRetriever.prototype.getLoaded = function() {
-  var self = this;
-  for (var i = 0; i < self.loaded.length; i++) {
-    var getResponseFor = getResponses.bind(self);
-    getResponseFor(self.loaded[i]);
-  }
-}
-
-function getResponses(data) {
-  var self = this;
-  var client = new Diffbot("29e49e8b36b2d63c2cf3ed4cf26e584b")
-  client.article.get({
-    url: data.url
-    }, function onSuccess(response) {
-        var cb = data.callback.bind(self);
-        cb(JSON.parse(response), data.data)
-    }, function onError(response) {
-        console.log(JSON.parse(response));
-    })
-}
-
-DataRetriever.prototype.rejoin = function(data) {
-  this.data.push(data);
-  this.numReceived++;
-  if (this.numReceived === this.loaded.length) {
-    console.log("YIPPEE!");
-    console.log(this.data);
-    embedlyCardMaker(this.data)
-  }
-}
-
-function embedlyCardMaker (data) {
-  var cards = document.querySelector("#results");
-  for (var i = 0; i < data.length; i++) {
-    for (var j = 0; j < data[i].length; j++) {
-      console.log(data[i][j]);
-      var card = document.createElement("a")
-      card.href = data[i][j];
-      card.className = "embedly-card"
-      card["data-card-key"]= "82db3e7ef863409080c2999dbf364c86"
-      card.style.display="inline-block"
-      cards.appendChild(card);
-    }
-  }
-  console.log(cards);
-}
 
 export default App;
