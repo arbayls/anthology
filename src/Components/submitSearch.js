@@ -38,6 +38,7 @@ class SubmitSearch extends Component {
 }
 
 function findArticles(e) {
+  localStorage.setItem('test', 'test!')
   e.preventDefault();
   let self = this;
   console.log(self.refs);
