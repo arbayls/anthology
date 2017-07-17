@@ -4,7 +4,7 @@ import axios from 'axios';
 class Login extends Component {
   constructor() {
     super();
-    this.state = {test: localStorage.getItem('test')}
+
   }
   render() {
     return (
@@ -20,12 +20,28 @@ class Login extends Component {
   }
 }
 
-function login() {
+function login(e) {
+  e.preventDefault();
   console.log("TEST");
+  var self = this;
+  axios.post("http://localhost:3000/users", {username: this.refs.username.value, password: this.refs.password.value}).then((loggedIn) => {
+    if (loggedIn.data) {
+      localStorage.setItem('user', self.refs.username.value)
+      this.props.updater()
+    }
+  })
 }
 
-function signup() {
+function signup(e) {
+  e.preventDefault();
   console.log("ANTOERHOKEJS TEST");
+  var self = this;
+  axios.post("http://localhost:3000/users/new", {username: this.refs.username.value, password: this.refs.password.value}).then((loggedIn) => {
+    if (loggedIn.data !== "Already Exists") {
+      localStorage.setItem('user', self.refs.username.value)
+      this.props.updater()
+    }
+  })
 }
 
 export default Login;

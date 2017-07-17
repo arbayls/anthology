@@ -10,6 +10,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {user: localStorage.getItem('user')}
+    this.updateState = this.updateState.bind(this)
   }
   render() {
     if (this.state.user) {
@@ -30,11 +31,17 @@ class App extends Component {
             <div className="header">
               <h1>Anthology</h1>
             </div>
-            <Login />
+            <Login updater={this.updateState}/>
           </div>
         </div>
       )
     }
+  }
+
+  updateState() {
+    console.log("HELLOOOOOO", this);
+    this.state = {user: localStorage.getItem('user')}
+    this.forceUpdate()
   }
 }
 
