@@ -9,12 +9,22 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <form className="userInfo">
-          <input id="username" type="text" name="username" placeholder="username" ref="username"></input>
-          <input id="password" type="password" name="password" placeholder="password" ref="password"></input>
-          <button id="submitLogin" type="button" name="Submit" onClick={login.bind(this)}>Log In</button>
-          <button id="submitSignup" type="button" name="Submit" onClick={signup.bind(this)}>Sign Up</button>
-        </form>
+        <div className="login-container">
+         <div className="logoWrapper"></div>
+         <h4>Welcome to Anthology</h4>
+          <form className="userInfo">
+            <input id="username" type="text" name="username" placeholder="  Username" ref="username"></input>
+            <input id="password" type="password" name="password" placeholder="  Password" ref="password"></input>
+            <button id="submitLogin" type="button" name="Submit" onClick={login.bind(this)}>Log In</button>
+            <button id="submitSignup" type="button" name="Submit" onClick={signup.bind(this)}>Sign Up</button>
+          </form>
+        </div>
+        <div className="hero">
+          <div className="heroText">
+            <h1>SHOWCASE YOUR ABILITIES</h1>
+            <h3 className="heroSubtitle">Create a portfolio quickly and easily.</h3>
+          </div>
+        </div>
       </div>
     );
   }

@@ -92,7 +92,6 @@ function incParser(response, author, res) {
 //Parses data received from business insider and returns array of http addresses written by freelancer
 function businessInsiderParser(response, author, res) {
   var parsedData = response;
-  console.log(parsedData);
   var allBusinessInsiderArticles = parsedData.objects[0].links;
   var businessInsiderAuthorArticles = allBusinessInsiderArticles.filter(function(article) {
     return article.includes("www.businessinsider.com/");
@@ -102,7 +101,6 @@ function businessInsiderParser(response, author, res) {
 
 function clearvoiceParser(response, author, res) {
   var parsedData = response;
-  console.log(parsedData);
   var allClearvoiceArticles = parsedData.objects[0].links;
   var clearvoiceAuthorArticles = allClearvoiceArticles.filter(function(article) {
     return (article.includes("www.clearvoice.com/")) && (!article.includes("www.clearvoice.com/software")) && (!article.includes("www.clearvoice.com/category")) && (!article.includes("www.clearvoice.com/contact")) && (!article.includes("www.clearvoice.com/blog")) &&

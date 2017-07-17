@@ -17,9 +17,6 @@ class App extends Component {
       return (
         <div className="App">
           <div className="container">
-            <div className="header">
-              <h1>Anthology</h1>
-            </div>
             <SubmitSearch></SubmitSearch>
           </div>
         </div>
@@ -28,9 +25,6 @@ class App extends Component {
       return (
         <div className="App">
           <div className="container">
-            <div className="header">
-              <h1>Anthology</h1>
-            </div>
             <Login updater={this.updateState}/>
           </div>
         </div>

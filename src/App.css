@@ -1,10 +1,11 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App {
+  text-align: center;
 }
 
 .App-header {
@@ -21,4 +22,92 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+h4 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #162428;
+  line-height: 1.4;
+  margin-bottom: .5rem;
+  margin-top: .2rem;
+  text-rendering: optimizeLegibility;
+}
+
+.login-container {
+  display: inline-block;
+  width: 35vw;
+}
+
+.login {
+  font-family: "Montserrat", "Helvetica", sans-serif;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+}
+
+.login button {
+  font-family: "Montserrat", "Helvetica", sans-serif;
+  font-size: 1.5vh;
+  background-color: #14c3a2;
+  width: 20vw;
+  height: 5vh;
+  border: 1px solid #14c3a2;
+  margin-top: 3vh;
+  border-radius: 5px;
+  color: #efefef;
+  transition: background-color .2s ease;
+}
+
+.login input {
+  width: 20vw;
+  line-height: 3vh;
+  border-radius: 5px;
+  border: 1px solid #dfe3e8;
+  margin-top: 3vh;
+}
+
+.login button:hover {
+  background-color: #02a180;
+}
+
+.login label {
+  text-align: left;
+}
+
+.logoWrapper {
+  margin: auto;
+  margin-bottom: 3vh;
+  padding: 2vh;
+  height: 5vh;
+  width: 5vh;
+  border-radius: 30%;
+  background-size: cover;
+  background-image: url('http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/book-icon.png');
+}
+
+.hero {
+  background-image: url('http://thesweetsetup.com/wp-content/uploads/2015/06/Ulysses-Pro-Writing-Hero-4.jpg');
+  height: 100vh;
+  width: 65vw;
+  display: inline-block;
+}
+
+.heroText {
+  padding-top: 50vh;
+  color: white;
+  width: 100%;
+  height: inherit;
+  background-color: rgba(0, 0, 0, 0.35);
+  font: 700 2rem "Montserrat", "Helvetica", sans-serif;
+}
+
+.heroSubtitle {
+  font: 100 1.5rem "Raleway", "Muli", "Helvetica", sans-serif;
+  color: #bcc1c6;
+}
+
+.userInfo {
+  display: block;
+  box-sizing: border-box;
 }
