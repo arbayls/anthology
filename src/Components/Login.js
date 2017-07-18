@@ -21,7 +21,7 @@ class Login extends Component {
         </div>
         <div className="hero">
           <div className="heroText">
-            <h1>SHOWCASE YOUR ABILITIES</h1>
+            <h1>SHOWCASE YOUR WORK</h1>
             <h3 className="heroSubtitle">Create a portfolio quickly and easily.</h3>
           </div>
         </div>

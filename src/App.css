@@ -35,7 +35,7 @@ h4 {
 }
 
 .login-container {
-  padding-top: 6vh;
+  padding-top: 8vh;
   display: inline-block;
   width: 35vw;
   float: left;
@@ -64,10 +64,11 @@ h4 {
 
 .userInfo input {
   width: 20vw;
-  line-height: 3vh;
+  line-height: 4vh;
   border-radius: 5px;
   border: 1px solid #dfe3e8;
-  margin-top: 3vh;
+  margin-top: 4vh;
+  font-size: .9rem;
 }
 
 .userInfo button:hover {
@@ -77,6 +78,7 @@ h4 {
 .logoWrapper {
   margin: auto;
   margin-bottom: 3vh;
+  margin-top: 4vh;
   padding: 2vh;
   height: 5vh;
   width: 5vh;
@@ -93,7 +95,7 @@ h4 {
 }
 
 .hero2 {
-  background-color: #162428;
+  background-color: #051317;
   height: 100vh;
   width: 65vw;
   display: inline-block;
@@ -142,7 +144,7 @@ p {
   z-index: -1;
   top: 0;
   left: 0;
-  width: 35vw;
+  width: 30vw;
   height: 100vh;
 }
 
@@ -152,11 +154,12 @@ p {
   z-index: -1;
   top: 0;
   right: 0;
-  width: 65vw;
+  width: 70vw;
   height: 100vh;
 }
 
 .search-container {
+  width: 30vw;
   position: fixed;
   top: 0;
   left: 0;
@@ -167,4 +170,101 @@ p {
 
 .results-container {
   float: right;
+  width: 70vw;
+}
+
+.single-card {
+  width: 33.33%;
+  display: inline-block;
+  max-height: 45vh;
+  margin-top: 5vh;
+  vertical-align: top;
+  overflow-x: hidden;
+}
+
+.tag {
+  position: relative;
+  top: 0;
+  margin: auto;
+  width: 90%;
+}
+
+.add {
+  position: relative;
+  bottom: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.add button {
+  width: 75%;
+
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #162428;
+  height: 6vh;
+}
+
+.navbar button {
+  margin-top: 1vh;
+  width: 8%;
+  height: 4vh;
+  float: right;
+  background-color: #162428;
+  border: 0;
+  margin-left: 2px;
+  font: 600 .85rem "Montserrat", "Helvetica", sans-serif;
+  color: #efefef;
+  transition: background-color .2s ease;
+}
+
+.navbar button:hover {
+  color: #3bd3e1;
+}
+
+.anthology {
+  float: left;
+  text-align: center;
+  font: 400 1.5rem "Montserrat", "Helvetica", sans-serif;
+  color: #efefef;
+  margin-left: 2vw;
+  margin-bottom: 5vh;
+  margin-top: -1.5vh;
+}
+
+.alert {
+  margin-top: 40%;
+  height: 6vh;
+  color: #efefef;
+  font: 100 1rem "Raleway", "Muli", "Helvetica", sans-serif;
+}
+
+.logout {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.2);
+  transition: background-color 0.25s ease,color 0.25s ease;
+  border: 1px solid #efefef;
+  border-radius: 50px;
+  margin-right: 2vw;
+  transition: background-color .2s ease;
+  transition: color .2s ease;
+}
+
+.portfolio-card {
+  overflow: visible;
+  max-height: auto;
+}
+
+.addButton {
+  overflow: visible;
+}
+
+.portfolio {
+  background-color: #efefef;
 }
