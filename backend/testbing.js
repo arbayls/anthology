@@ -17,11 +17,20 @@ Bing.web(`site:businessinsider.com "Larry%20Kim"`, {
   client.article.get({
     url: url
   }, function onSuccess(data) {
-        // var links = JSON.parse(data).objects[0].links.filter(link => {return link.includes('https://twitter.com/larrykim/status')})
-        // for (var i = 0; i < links.length; i++) {
-        //   console.log(links[i]);
-        // }
-        console.log(JSON.parse(data).objects);
+        var links = JSON.parse(data).objects[0].links
+        console.log(links);
+        for (var i = 0; i < links.length; i++) {
+          links[i]
+          client.article.get({
+            url: links[i]
+          }, function onSuccess(moreData) {
+            if (JSON.parse(moreData).objects) {
+              console.log("MOOOOOAR: ", JSON.parse(moreData).objects[0].authors);
+              console.log("LEZZZZ: ", JSON.parse(moreData).objects[0].author);
+              
+            }
+          })
+        }
     }, function onError(data) {
       console.log(data.data);
     })

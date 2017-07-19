@@ -42,7 +42,7 @@ class SubmitSearch extends Component {
             <input id="author username" type="text" name="Author" placeholder="  Author's Full Name" ref="author"></input>
             <input id="handle password" type="text" name="Handle" placeholder="  Twitter Handle" ref="handle"></input>
             <p>You may provide links to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/JohnDoe </p>
-            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ></input>
+            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
             <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ></input>
             <button id="submit submitLogin" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
           </form>
@@ -64,16 +64,46 @@ function findArticles(e) {
   e.preventDefault();
   let self = this;
   console.log(self.refs);
-  axios.post('http://localhost:3000/articles', {author: self.refs.author.value, handle: self.refs.handle.value})
+  var first = self.refs.author.value.split(" ")[0];
+  var last = self.refs.author.value.split(" ")[1] || "";
+  var sites = self.refs.websites.value.split(",");
+  var results = [];
+  var join = rejoin.bind(self);
+  for (var i = 0; i < sites.length; i++) {
+    var site = sites[i].trim();
+    results.push(site);
+    axios.post('http://localhost:3000/articles', {firstName: first, lastName: last, site: site})
     .then(function(response) {
       console.log("Here is your res: ", response);
       var data = response.data;
-      console.log(data);
-      self.setState({articles: data})
+      console.log(JSON.parse(data));
+      if (JSON.parse(data).objects) {
+
+        join(JSON.parse(data).objects[0].links, results);
+      } else {
+        join([], results);
+      }
+      // self.setState({articles: data})
     })
     .catch(function(error) {
       console.log("ERR", error);
+      join([], results);
     })
+  }
+  results.push([]);
+}
+
+function rejoin(data, results) {
+  var self = this;
+  var responses = results[results.length - 1];
+  responses.push(data);
+  console.log("RESULT LEN: ", results.length - 1);
+  console.log("RESPONSE LEN: ", responses.length);
+  console.log(responses);
+  if (responses.length === results.length - 1) {
+    console.log("SELF IS HERE: ", self);
+    self.setState({articles: responses});
+  }
 }
 
 

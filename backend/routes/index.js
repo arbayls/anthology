@@ -5,78 +5,77 @@ let Bing = require('node-bing-api')({ accKey: "f13f5a60955b4e35b071e14eea9a4057"
 let client = new Diffbot("59614fe60c56f7800045670876d8c878");
 let DataRetriever = require('../public/javascripts/dataretriever.js');
 
+
+// Bing.web(`site:businessinsider.com "Larry%20Kim"`, {
+//   count: 1
+// }, function(error, res, body) {
+//   console.log(error);
+//   console.log(body.webPages.value[0].displayUrl);
+//   var url = body.webPages.value[0].displayUrl;
+//   if (!url.includes("https://")) {
+//     if (!url.includes("http://")) {
+//       url = "https://" + url;
+//     }
+//   }
+//   var Diffbot = require('diffbot-node-client');
+//   var client = new Diffbot("59614fe60c56f7800045670876d8c878");
+//
+//   client.article.get({
+//     url: url
+//   }, function onSuccess(data) {
+//         // var links = JSON.parse(data).objects[0].links.filter(link => {return link.includes('https://twitter.com/larrykim/status')})
+//         // for (var i = 0; i < links.length; i++) {
+//         //   console.log(links[i]);
+//         // }
+//         console.log(JSON.parse(data).objects);
+//     }, function onError(data) {
+//       console.log(data.data);
+//     })
+// })
+
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('index', { title: 'Express' });
 // });
 
 router.post('/articles', function(req, res, next) {
-  // var bingRequest = `site:${req.body.site} "${req.body.firstName}%20${req.body.lastName}"`;
+  var bingRequest = `site:${req.body.site} "${req.body.firstName}%20${req.body.lastName}"`;
 
-  // Bing.web(bingRequest, {
-  //   count: 1
-  // }, function(error, result, body) {
-  //   if (error !== null) {
-  //     res.json(error);
-  //     return;
-  //   }
-  //   if (!body.webPages) {
-  //     res.json(body);
-  //     return;
-  //   }
-    // var url = body.webPages.value[0].displayUrl;
-
-    dataGetter(req, res);
-
-    // client.article.get({
-    //   url: "https://twitter.com/larrykim"
-    // }, function onSuccess(data) {
-    //     console.log("SUCCCCCCSSSEEEzZZZ");
-    //       res.json(data)
-    //   }, function onError(data) {
-    //     console.log("L:OOOOOOOOSEZER");
-    //       res.json(data);
-    //   })
-  // })
+  Bing.web(bingRequest, {
+    count: 1
+  }, function(error, result, body) {
+    if (error !== null) {
+      res.json(error);
+      return;
+    }
+    if (!body.webPages) {
+      res.json(body);
+      return;
+    }
+    var url = body.webPages.value[0].displayUrl;
+    if (!url.includes("https://")) {
+      if (!url.includes("http://")) {
+        url = "https://" + url;
+      }
+    }
+    client.article.get({
+      url: url
+    }, function onSuccess(data) {
+        console.log("SUCCCCCCSSSEEEzZZZ");
+          res.json(data)
+      }, function onError(data) {
+        console.log("L:OOOOOOOOSEZER");
+          res.json(data);
+      })
+  })
 
 })
 
 function dataGetter (req, res) {
-  var author = req.body.author;
-  var firstName = author.split(' ')[0];
-  var lastName = author.split(' ')[author.split(" ").length - 1] || '';
-  var twitterHandle = req.body.handle;
-  var incMag = ('https://www.inc.com/author/' + firstName.toUpperCase() + '-' + lastName.toUpperCase())
-  var twitter = ('https://twitter.com/' + twitterHandle)
-  var businessInsider = ('http://www.businessinsider.com/author/' + firstName.toLowerCase() + '-' + lastName.toLowerCase() + "/date/desc")
-  var clearvoice = ('https://www.clearvoice.com/author/' + firstName + lastName)
-  var sources = [];
 
-  //object passed into incParser
-  var incObj = {
-    firstName: firstName.toLowerCase(),
-    lastName: lastName.toLowerCase()
-  }
-  //object passed into businessInsiderParser
-  var businessInsiderObj = {
-    firstName: firstName.toLowerCase(),
-    lastName: lastName.toLowerCase()
-  }
-  //object passed into clearvoiceParser
-  var clearvoiceObj = {
-    firstName: firstName,
-    lastName: lastName
-  }
-
-  var twitterObj = {
-    handle: twitterHandle
-  }
 
   var retriever = new DataRetriever();
-  retriever.load(incMag, incParser, incObj);
-  retriever.load(businessInsider, businessInsiderParser, businessInsiderObj);
-  retriever.load(clearvoice, clearvoiceParser, clearvoiceObj);
-  retriever.load(twitter, twitterParser, twitterObj)
+
   retriever.getLoaded(res);
 }
 
