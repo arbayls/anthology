@@ -12,7 +12,7 @@ Bing.web(`site:businessinsider.com "Larry%20Kim"`, {
     }
   }
   var Diffbot = require('diffbot-node-client');
-  var client = new Diffbot("59614fe60c56f7800045670876d8c878");
+  var client = new Diffbot("4ebd0ead48e5a0c52e8917cdf8ea9868");
 
   client.article.get({
     url: url
@@ -27,7 +27,7 @@ Bing.web(`site:businessinsider.com "Larry%20Kim"`, {
             if (JSON.parse(moreData).objects) {
               console.log("MOOOOOAR: ", JSON.parse(moreData).objects[0].authors);
               console.log("LEZZZZ: ", JSON.parse(moreData).objects[0].author);
-              
+
             }
           })
         }

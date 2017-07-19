@@ -23,7 +23,7 @@ class App extends Component {
           <div className="container">
             <Navbar find={this.updateState} goToPortfolio={this.goToPortfolio} logout={this.logout}></Navbar>
             <SubmitSearch></SubmitSearch>
-          </div>s
+          </div>
         </div>
       );
     } else if (this.state.user && this.state.isPortfolio) {

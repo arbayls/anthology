@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Diffbot from 'diffbot-node-client';
 import axios from 'axios';
 import DisplayArticles from './displayArticles'
+import Loader from '../loader.svg'
 
 class SubmitSearch extends Component {
   constructor() {
     super();
-    this.state = {articles: null}
+    this.state = {articles: null, loading: false}
   }
 
   render () {
-    if (this.state.articles) {
+    if (this.state.articles && !this.state.loading) {
       return (
         <div className="searchForm login">
           <div className="search-container login-container">
@@ -20,13 +21,35 @@ class SubmitSearch extends Component {
               <input id="author username" type="text" name="Author" placeholder="Author" ref="author"></input>
               <input id="handle password" type="text" name="Handle" placeholder="Twitter Handle" ref="handle"></input>
               <p>You may provide a link to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/john-doe </p>
-              <input id="handle password" type="text" name="Handle" placeholder="  Author Page" ></input>
-              <input id="handle password" type="text" name="Handle" placeholder="  Author Page" ></input>
+              <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
               <button id="submit" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
             </form>
           </div>
           <div className="results-container hero2">
             <DisplayArticles articles={this.state.articles}></DisplayArticles>
+          </div>
+          <div className="light"></div>
+          <div className="dark"></div>
+        </div>
+      )
+    } else if (!this.state.loading && !this.state.articles){
+      return (
+        <div className="searchForm login">
+        <div className="search-container login-container">
+        <div className="logoWrapper"></div>
+          <h2>Search for Your Content</h2>
+          <form className="api userInfo">
+            <input id="author username" type="text" name="Author" placeholder="  Author's Full Name" ref="author"></input>
+            <input id="handle password" type="text" name="Handle" placeholder="  Twitter Handle" ref="handle"></input>
+            <p>You may provide links to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/JohnDoe </p>
+            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
+            <button id="submit submitLogin" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
+          </form>
+          </div>
+          <div className="results-container hero2">
+            <div className="alert">
+              <p>Your content will appear here after your search. <br />The process may take a few minutes, so please don&apos;t refresh your page.</p>
+            </div>
           </div>
           <div className="light"></div>
           <div className="dark"></div>
@@ -43,12 +66,12 @@ class SubmitSearch extends Component {
             <input id="handle password" type="text" name="Handle" placeholder="  Twitter Handle" ref="handle"></input>
             <p>You may provide links to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/JohnDoe </p>
             <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
-            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ></input>
             <button id="submit submitLogin" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
           </form>
           </div>
           <div className="results-container hero2">
             <div className="alert">
+              <img src={Loader}></img>
               <p>Your content will appear here after your search. <br />The process may take a few minutes, so please don&apos;t refresh your page.</p>
             </div>
           </div>
@@ -63,6 +86,7 @@ class SubmitSearch extends Component {
 function findArticles(e) {
   e.preventDefault();
   let self = this;
+  self.setState({articles: null, loading: true})
   console.log(self.refs);
   var first = self.refs.author.value.split(" ")[0];
   var last = self.refs.author.value.split(" ")[1] || "";
@@ -102,7 +126,7 @@ function rejoin(data, results) {
   console.log(responses);
   if (responses.length === results.length - 1) {
     console.log("SELF IS HERE: ", self);
-    self.setState({articles: responses});
+    self.setState({articles: responses, loading: false});
   }
 }
 
