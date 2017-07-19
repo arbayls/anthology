@@ -130,8 +130,13 @@ function businessInsiderParser(response, author, res) {
 
 function twitterParser(response, twitterHandle, res) {
 //add twitter stuff here...
-  var tweets = response.objects[0].links.filter(tweet => {return tweet.includes(`https://twitter.com/${twitterHandle.handle}/status`)});
-  this.rejoin(tweets, res);
+  var parsedData = response;
+  if (parsedData.objects) {
+    var tweets = response.objects[0].links.filter(tweet => {return tweet.includes(`https://twitter.com/${twitterHandle.handle}/status`)});
+    this.rejoin(tweets, res);
+  } else {
+    this.rejoin([], res);
+  }
 }
 
 module.exports = router;
