@@ -20,7 +20,7 @@ DataRetriever.prototype.getLoaded = function(res) {
 DataRetriever.prototype.getResponses = function(data, res) {
   console.log(data);
   var self = this;
-  var client = new Diffbot("29e49e8b36b2d63c2cf3ed4cf26e584b")
+  var client = new Diffbot("59614fe60c56f7800045670876d8c878")
   client.article.get({
     url: data.url
     }, function onSuccess(response) {
