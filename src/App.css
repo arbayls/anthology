@@ -176,7 +176,7 @@ p {
 .single-card {
   width: 33.33%;
   display: inline-block;
-  max-height: 45vh;
+  max-height: 30vh;
   margin-top: 5vh;
   vertical-align: top;
   overflow-x: hidden;

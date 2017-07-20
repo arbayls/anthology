@@ -41,8 +41,8 @@ class SubmitSearch extends Component {
           <form className="api userInfo">
             <input id="author username" type="text" name="Author" placeholder="  Author's Full Name" ref="author"></input>
             <input id="handle password" type="text" name="Handle" placeholder="  Twitter Handle" ref="handle"></input>
-            <p>You may provide links to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/JohnDoe </p>
-            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
+            <p>You may provide links to websites <br></br>you have written for below, deliniated with commas. <br></br> <br></br> Example: <br></br> inc.com, www.medium.com, www.clearvoice.com/author/JohnDoe, etc. </p>
+            <input id="handle password" type="text" name="Handle" placeholder="  Website, Another Website, etc." ref="websites"></input>
             <button id="submit submitLogin" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
           </form>
           </div>
@@ -64,8 +64,8 @@ class SubmitSearch extends Component {
           <form className="api userInfo">
             <input id="author username" type="text" name="Author" placeholder="  Author's Full Name" ref="author"></input>
             <input id="handle password" type="text" name="Handle" placeholder="  Twitter Handle" ref="handle"></input>
-            <p>You may provide links to your author page <br></br> from any website in the spaces below. <br></br> <br></br> Example: <br></br> https://www.clearvoice.com/author/JohnDoe </p>
-            <input id="handle password" type="text" name="Handle" placeholder="  Link to Author Page" ref="websites"></input>
+            <p>You may provide links to websites <br></br>you have written for below, deliniated with commas. <br></br> <br></br> Example: <br></br> inc.com, www.medium.com, www.clearvoice.com/author/JohnDoe, etc. </p>
+            <input id="handle password" type="text" name="Handle" placeholder="  Website, Another Website, etc." ref="websites"></input>
             <button id="submit submitLogin" type="button" name="Submit" onClick={findArticles.bind(this)}>Submit</button>
           </form>
           </div>
@@ -101,9 +101,9 @@ function findArticles(e) {
       console.log("Here is your res: ", response);
       var data = response.data;
       console.log(JSON.parse(data));
-      if (JSON.parse(data).objects) {
+      if (JSON.parse(data).length > 0) {
 
-        join(JSON.parse(data).objects[0].links, results);
+        join(JSON.parse(data), results);
       } else {
         join([], results);
       }
